@@ -1,4 +1,4 @@
-package learnjava.skypro.cookbookapp;
+package learnjava.skypro.cookbookapp.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
