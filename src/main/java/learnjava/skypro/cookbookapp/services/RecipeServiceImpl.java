@@ -29,21 +29,22 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe editRecipe(int id, Recipe recipe) {
-        if (recipes.containsKey(id)) {
+    public RecipeDTO editRecipe(int id, Recipe recipe) {
+        Recipe editedRecipe = recipes.get(id);
+        if (editedRecipe != null) {
             recipes.put(id, recipe);
-            return recipe;
+            return RecipeDTO.from(id, recipe);
         }
         return null;
     }
 
     @Override
-    public String removeRecipe(int id) {
-        if (recipes.containsKey(id)) {
-            recipes.remove(id);
-            return "Рецепт под номером " + id + "удалён";
+    public RecipeDTO removeRecipe(int id) {
+        Recipe removedRecipe = recipes.remove(id);
+        if (removedRecipe != null) {
+            return RecipeDTO.from(id, removedRecipe);
         }
-        return "Указанный id не существует";
+        return null;
     }
 
     @Override

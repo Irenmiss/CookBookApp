@@ -11,9 +11,9 @@ public interface RecipeService {
 
     RecipeDTO getRecipe(int id);
 
-    Recipe editRecipe(int id, Recipe recipe);
+    RecipeDTO editRecipe(int id, Recipe recipe);
 
-    String removeRecipe(int id);
+    RecipeDTO removeRecipe(int id);
 
     Map<Integer, Recipe> getAllRecipes();
 }
