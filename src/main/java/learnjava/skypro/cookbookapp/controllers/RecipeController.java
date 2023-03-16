@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import learnjava.skypro.cookbookapp.dto.RecipeDTO;
 import learnjava.skypro.cookbookapp.model.Recipe;
 import learnjava.skypro.cookbookapp.services.RecipeService;
-import learnjava.skypro.cookbookapp.services.RecipeServiceImpl;
+import learnjava.skypro.cookbookapp.services.impl.RecipeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
