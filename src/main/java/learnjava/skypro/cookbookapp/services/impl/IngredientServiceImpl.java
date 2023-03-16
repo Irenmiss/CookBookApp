@@ -58,6 +58,7 @@ public class IngredientServiceImpl implements IngredientService {
     public String removeIngredient(int id) {
         if (ingredients.containsKey(id)) {
             ingredients.remove(id);
+            saveToFile();
             return "Ингредиент под номером " + id + "удалён";
         }
         return "Указанный id не существует";

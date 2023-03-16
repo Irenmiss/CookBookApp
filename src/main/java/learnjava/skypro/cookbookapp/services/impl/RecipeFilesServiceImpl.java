@@ -22,6 +22,7 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
             Files.writeString(Path.of(recipesFilePath, recipesFileName), json);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -31,6 +32,7 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
         try {
             return Files.readString(Path.of(recipesFilePath, recipesFileName));
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

@@ -59,6 +59,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDTO removeRecipe(int id) {
         Recipe removedRecipe = recipes.remove(id);
+        saveToFile();
         if (removedRecipe != null) {
             return RecipeDTO.from(id, removedRecipe);
         }
