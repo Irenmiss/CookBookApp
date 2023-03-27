@@ -10,6 +10,11 @@ import learnjava.skypro.cookbookapp.services.RecipeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,5 +94,34 @@ public class RecipeServiceImpl implements RecipeService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public Path createTextRecipesFile() throws IOException {
+        Path path = recipeFilesService.createTempFile("recipesTextFile");
+        for (Recipe recipe : recipes.values()) {
+            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+                writer.append(recipe.getTitle()).append("\n \n").append("Время приготовления: ").append(String.valueOf(recipe.getCookingTime())).append(" минут.").append("\n");
+                writer.append("\n");
+                writer.append("Ингредиенты: \n \n");
+                recipe.getIngredients().forEach(ingredient -> {
+                    try {
+                        writer.append(" - ").append(ingredient.getTitle()).append(" - ").append(String.valueOf(ingredient.getNumber())).append(" ").append(ingredient.getMeasure()).append("\n \n");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                writer.append("\n");
+                writer.append("Инструкция приготовления: \n \n");
+                recipe.getSteps().forEach(step -> {
+                    try {
+                        writer.append(" > ").append(step).append("\n \n");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                writer.append("\n \n");
+            }
+        }
+        return path;
     }
 }

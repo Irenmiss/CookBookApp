@@ -1,9 +1,11 @@
 package learnjava.skypro.cookbookapp.services.impl;
 
+import learnjava.skypro.cookbookapp.model.Recipe;
 import learnjava.skypro.cookbookapp.services.RecipeFilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,8 +38,8 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean cleanDataFile() {
+    @Override
+    public boolean cleanDataFile() {
         try {
             Path path = Path.of(recipesFilePath, recipesFileName);
             Files.deleteIfExists(path);
@@ -46,6 +48,19 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    @Override
+    public File getDataFile() {
+        return new File(recipesFilePath + "/" + recipesFileName);
+    }
+
+    @Override
+    public Path createTempFile(String suffix) {
+        try {
+            return Files.createTempFile(Path.of(recipesFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

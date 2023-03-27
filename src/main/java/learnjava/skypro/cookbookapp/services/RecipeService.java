@@ -3,6 +3,8 @@ package learnjava.skypro.cookbookapp.services;
 import learnjava.skypro.cookbookapp.dto.RecipeDTO;
 import learnjava.skypro.cookbookapp.model.Recipe;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 
 public interface RecipeService {
@@ -16,4 +18,6 @@ public interface RecipeService {
     RecipeDTO removeRecipe(int id);
 
     Map<Integer, Recipe> getAllRecipes();
+
+    Path createTextRecipesFile() throws IOException;
 }

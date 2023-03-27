@@ -4,6 +4,7 @@ import learnjava.skypro.cookbookapp.services.IngredientFilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,8 +37,8 @@ public class IngredientFilesServiceImpl implements IngredientFilesService {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean cleanDataFile() {
+    @Override
+    public boolean cleanDataFile() {
         try {
             Path path = Path.of(ingredientFilePath, ingredientFileName);
             Files.deleteIfExists(path);
@@ -47,5 +48,9 @@ public class IngredientFilesServiceImpl implements IngredientFilesService {
             e.printStackTrace();
             return false;
         }
+    }
+    @Override
+    public File getDataFile() {
+        return new File(ingredientFilePath + "/" + ingredientFileName);
     }
 }
